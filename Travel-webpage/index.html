@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="logo">
+        <a href="index.html">
+            <img src="logo.png" alt="travel_logo">
+        </a>
+    </div>
+    <div id="nav">
+        <a id="home" class="gnb">Home</a>
+        <a id="seoul" class="gnb">Seoul</a>
+        <a id="tokyo" class="gnb">Tokyo</a>
+        <a id="paris" class="gnb">Paris</a>
+    </div>
+
+    <img id="photo" src="images/home.jpg" alt="home" width="80%">
+
+<!-- jQuery cdn -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+<!-- JQuery -->
+    <script>
+        $('#nav a').on('click', selectMenu);
+
+        $('#photo').on('mouseenter', mouseEnterPhoto);
+        $('#photo').on('mouseleave', mouseLeavePhoto);
+
+        // keyboard event handling
+        $(document).on('keydown', selectMenu);
+
+        // change images
+        function selectMenu(event){
+          
+          // check the currentTarget
+          var targetId = '';
+          if (event.type === 'click') {
+            targetId = event.currentTarget.id;
+          } else if (event.type === 'keydown'){
+            if(event.key === '1'){
+              targetId = 'home';
+            } else if (event.key === '2'){
+              targetId = 'seoul';
+            } else if (event.key === '3'){
+              targetId = 'tokyo';
+            } else if (event.key === '4'){
+              targetId = 'paris';
+            }
+          }
+
+          //var targetId = event.currentTarget.id;
+          $('#photo').attr('src', 'images/' + targetId + '.jpg');
+
+          $('#nav a').css('font-weight', 'normal');
+          $('#' + targetId).css('font-weight', 'bold');
+        }
+
+
+        // image shadow
+        function mouseEnterPhoto() {
+            $('#photo').css('box-shadow', '5px 10px');
+        }
+        function mouseLeavePhoto() {
+            $('#photo').css('box-shadow', 'none');
+        }
+        
+    </script>
+
+</body>
+</html>
